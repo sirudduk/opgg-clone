@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import Image from 'next/image';
 
 import usePosition from '@/hooks/usePosition';
@@ -22,10 +21,9 @@ export default function MostPosition(props: MostPositionProps) {
 
   const { positionText, positionImgUrl } = usePosition(position.position);
 
-  const pickRate = useMemo(
-    () => Math.floor((position.games / gameTotal) * 100),
-    [gameTotal, position.games],
-  );
+  const pickRate = () => {
+    return Math.floor((position.games / gameTotal) * 100);
+  };
 
   return (
     <div className="flex gap-[8px] items-center">

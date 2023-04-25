@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 export enum PositionTypes {
   TOP = 'TOP',
   JNG = 'JNG',
@@ -9,7 +7,7 @@ export enum PositionTypes {
 }
 
 export default function usePosition(position: string) {
-  const positionText = useMemo(() => {
+  const positionText = () => {
     return {
       [PositionTypes.TOP]: '탑',
       [PositionTypes.JNG]: '정글',
@@ -17,9 +15,9 @@ export default function usePosition(position: string) {
       [PositionTypes.ADC]: '바텀',
       [PositionTypes.SUP]: '서포터',
     }[position];
-  }, [position]);
+  };
 
-  const positionImgUrl = useMemo((): any => {
+  const positionImgUrl = () => {
     if (!position) return '/assets/imgs/positions/top.png';
 
     return {
@@ -29,7 +27,7 @@ export default function usePosition(position: string) {
       [PositionTypes.ADC]: '/assets/imgs/positions/adc.png',
       [PositionTypes.SUP]: '/assets/imgs/positions/sup.png',
     }[position];
-  }, [position]);
+  };
 
   return {
     positionText,

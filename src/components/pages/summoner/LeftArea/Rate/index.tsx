@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { IChampion } from '@/interface/summoner';
@@ -19,19 +19,19 @@ export default function Rate() {
 
   const { data } = useMostInfoQuery(summonerName);
 
-  const champions = useMemo(() => {
+  const champions = () => {
     return data.champions.sort((a: IChampion, b: IChampion) => {
       return b.games - a.games;
     });
-  }, [data]);
+  };
 
-  const recentWinRate = useMemo(() => {
+  const recentWinRate = () => {
     return data.recentWinRate.sort((a: any, b: any) => {
       const aGame = a.wins + a.losses;
       const bGame = b.wins + b.losses;
       return bGame - aGame;
     });
-  }, [data]);
+  };
 
   return (
     <div className="border border-gray-3">

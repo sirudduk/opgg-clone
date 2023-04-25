@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import MostPosition from './Position';
 import { IPositions } from '@/interface/summoner';
 
@@ -9,10 +8,9 @@ interface MostPositionsProps {
 export default function MostPositions(props: MostPositionsProps) {
   const { positions } = props;
 
-  const gameTotal = useMemo(
-    () => positions.reduce((a, b) => a + b.games, 0),
-    [positions],
-  );
+  const gameTotal = () => {
+    return positions.reduce((a, b) => a + b.games, 0);
+  };
 
   return (
     <div className="flex flex-col p-[16px] gap-[22px]">

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 import { IMostInfo } from '@/interface/summoner';
 import MatchesList from './MatchList';
@@ -19,15 +19,13 @@ export default function RightArea(props: RightAreaProps) {
     2: '자유 5:5 랭크',
   }[selectedTab];
 
-  const games = useMemo(() => {
+  const games = () => {
     if (selectedTab === 0) {
       return mostInfo.games;
     }
 
-    return mostInfo.games.filter(game => {
-      return game.gameType === t;
-    });
-  }, [mostInfo.games, selectedTab, t]);
+    return mostInfo.games.filter(game => game.gameType === t);
+  };
 
   return (
     <div className="min-w-[690px] flex flex-col gap-[16px]">

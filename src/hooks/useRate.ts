@@ -1,5 +1,4 @@
 import { kdaCalc, winRateCalc } from 'src/utils/calc';
-import { useMemo } from 'react';
 
 interface RateHooksProps {
   kills?: number;
@@ -23,31 +22,33 @@ export default function useRate(props: RateHooksProps) {
 
   const games = props.games ? props.games : wins + losses;
 
-  const csRate = useMemo(() => {
+  const csRate = () => {
     if (!cs) return null;
     return Math.round((cs / wins + losses) * 10) / 10;
-  }, [cs, wins, losses]);
+  };
 
-  const kdaRate = useMemo(() => {
+  const kdaRate = () => {
     const k = kdaCalc(kills, games);
     const a = kdaCalc(assists, games);
     const d = kdaCalc(deaths, games);
 
     return ((Number(k) + Number(a)) / Number(d)).toFixed(2);
-  }, [kills, assists, deaths, games]);
+  };
 
-  const kdaText = useMemo(() => {
+  const kdaText = () => {
     return `${kdaCalc(kills, games).toFixed(1)} / ${kdaCalc(
       deaths,
       games,
     ).toFixed(1)} / ${kdaCalc(assists, games).toFixed(1)}`;
-  }, [games, kills, assists, deaths]);
+  };
 
-  const winRate = useMemo(() => winRateCalc(wins, games), [wins, games]);
+  const winRate = () => {
+    return winRateCalc(wins, games);
+  };
 
-  const winPercent = useMemo(() => {
+  const winPercent = () => {
     return Math.floor((wins / (wins + losses)) * 100);
-  }, [losses, wins]);
+  };
 
   const kdaRateStyle = () => {
     if (Number(kdaRate) >= 5) return 'text-[#e19205]';
@@ -57,7 +58,7 @@ export default function useRate(props: RateHooksProps) {
   };
 
   const winRateStyle = () => {
-    if (winRate >= 60) return 'text-[#c6443e]';
+    if (Number(winRate) >= 60) return 'text-[#c6443e]';
     return '';
   };
 

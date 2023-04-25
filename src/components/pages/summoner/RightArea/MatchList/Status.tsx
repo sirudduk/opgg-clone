@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import dayjs from 'dayjs';
 
 interface GameStateProps {
@@ -12,21 +11,21 @@ interface GameStateProps {
 export default function MatchStatus(props: GameStateProps) {
   const { gameType, createDate, needRenew, isWin, gameLength } = props;
 
-  const gameTime = useMemo(() => {
-    return Math.floor(gameLength / 60);
-  }, [gameLength]);
+  const gameTime = () => {
+    Math.floor(gameLength / 60);
+  };
 
-  const winDescription = useMemo(() => {
+  const winDescription = () => {
     if (needRenew) return '다시하기';
     return isWin ? '승리' : '패배';
-  }, [isWin, needRenew]);
+  };
 
-  const winStyle = useMemo(() => {
+  const winStyle = () => {
     if (needRenew) return 'text-gray-80';
     return isWin ? 'text-[#2c709b]' : 'text-[#d0021b]';
-  }, [isWin, needRenew]);
+  };
 
-  const gameDate = useMemo(() => {
+  const gameDate = () => {
     const day = dayjs(createDate * 1000);
 
     const diffMin = dayjs().diff(day, 'minutes');
@@ -38,7 +37,7 @@ export default function MatchStatus(props: GameStateProps) {
     if (diffDay === 1) return '하루전';
 
     return `${diffDay}일 전`;
-  }, [createDate]);
+  };
 
   return (
     <div className="flex flex-col gap-[4px] items-center justify-center">

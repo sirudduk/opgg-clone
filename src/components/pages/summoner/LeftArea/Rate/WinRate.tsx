@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 import WinRateChart from './WinRateChart';
 import { winRateCalc } from 'src/utils/calc';
 import { IWinRate } from '@/interface/summoner';
@@ -20,14 +18,12 @@ export default function WinRateList(props: WinRateProps) {
 }
 
 function WinRate(props: { winRate: IWinRate }) {
-  const winRate = useMemo(
-    () =>
-      winRateCalc(
-        props.winRate.wins,
-        props.winRate.wins + props.winRate.losses,
-      ),
-    [props.winRate.wins, props.winRate.losses],
-  );
+  const winRate =() => {
+    return winRateCalc(
+      props.winRate.wins,
+      props.winRate.wins + props.winRate.losses,
+    ),
+  }
 
   return (
     <div className="px-[15px] py-[8px] flex justify-between border-b border-gray-3 last:border-b-0">

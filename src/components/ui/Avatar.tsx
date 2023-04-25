@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import Image from 'next/image';
 
 interface AvatarProps {
@@ -19,11 +18,11 @@ export default function Avatar(props: AvatarProps) {
   const { imgUrl = '', isRounded, size } = props;
   const defaultImgUrl = '/assets/imgs/champ.png';
 
-  const getImgUrl = useMemo(() => {
+  const getImgUrl = () => {
     const removeString = imgUrl.substring(0, imgUrl.indexOf('opgg', 0));
 
     return 'https://' + imgUrl.replace(removeString, '');
-  }, [imgUrl]);
+  };
 
   return (
     <Image

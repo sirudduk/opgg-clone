@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import Avatar, { AvatarSizeType } from '@/components/ui/Avatar';
 
 interface MatchChampionProps {
@@ -9,10 +8,10 @@ interface MatchChampionProps {
 export default function MatchChampion(props: MatchChampionProps) {
   const { championImgUrl, peak, spells } = props;
 
-  const championName = useMemo(() => {
+  const championName = () => {
     const removeString = championImgUrl.split('/champion/')[1];
     return removeString.slice(0, removeString.length - 4);
-  }, [championImgUrl]);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center gap-[8px]">

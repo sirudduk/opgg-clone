@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import Image from 'next/image';
 
 import usePosition from '@/hooks/usePosition';
@@ -13,7 +12,7 @@ interface TierProps {
 export default function Tier(props: TierProps) {
   const { positionText } = usePosition(props.position);
 
-  const tierText = useMemo(() => {
+  const tierText = () => {
     const noSeries = ['Challenger', 'Grandmaster', 'Master'].includes(
       props.tier.tierRank.tier,
     );
@@ -25,13 +24,13 @@ export default function Tier(props: TierProps) {
       ];
 
     return `${props.tier.tierRank.tier} ${tierNumber}`;
-  }, [props.tier.tierRank.tier, props.tier.tierRank.shortString]);
+  };
 
-  const winRate = useMemo(() => {
+  const winRate = () => {
     return Math.round(
       (props.tier.wins / (props.tier.losses + props.tier.wins)) * 100,
     );
-  }, [props.tier.losses, props.tier.wins]);
+  };
 
   return (
     <div className="bg-gray-1 border border-gray-3 p-[16px] flex gap-[10px]">
